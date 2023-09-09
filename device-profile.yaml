@@ -1,0 +1,44 @@
+name: "SensorCluster2"
+manufacturer: "Raspberry Pi Foundation"
+model: "Raspberry Pi 3b+"
+labels:
+  - "rpi"
+description: "Sensor cluster providing metrics for reading .csv"
+
+deviceResources:
+      -
+        name: Id
+        description: "Id"
+        properties:
+          value:
+            { type: "Int64", readWrite: "RW" }
+      -
+        name: Date
+        description: "Date"
+        properties:
+          value:
+            { type: "String", readWrite: "RW" }
+      -
+        name: Temperature
+        description: "Temperature"
+        properties:
+          value:
+            { type: "Float64", readWrite: "RW" }
+      -
+        name: Humidity
+        description: "Humidity"
+        properties:
+          value:
+            { type: "Float64", readWrite: "RW" }
+      -
+        name: Light
+        description: "Light"
+        properties:
+          value:
+            { type: "Float64", readWrite: "RW" }
+      -
+        name: CO2
+        description: "CO2"
+        properties:
+          value:
+            { type: "Float64", readWrite: "RW" }

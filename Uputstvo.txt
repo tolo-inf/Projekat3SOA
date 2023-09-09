@@ -1,0 +1,128 @@
+1. Na Data servisu, potrebno je izvrsiti HTTP POST metodu kako bi se kreirao ValueDescriptor:
+adresa: http://localhost:48080/api/v1/valuedescriptor
+body1: 
+{
+    "name": "Id",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "Int64",
+    "uomLabel": "Id",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "Id"
+    ]
+}
+
+body2: 
+{
+    "name": "Date",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "String",
+    "uomLabel": "Date",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "Date"
+    ]
+}
+
+body3: 
+{
+    "name": "Temperature",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "Float64",
+    "uomLabel": "Temperature",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "Temperature"
+    ]
+}
+
+body4: 
+{
+    "name": "Humidity",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "Float64",
+    "uomLabel": "Humidity",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "Humidity"
+    ]
+}
+
+body5: 
+{
+    "name": "Light",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "Float64",
+    "uomLabel": "Light",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "Light"
+    ]
+}
+
+body6:
+{
+    "name": "CO2",
+    "description": "data from .csv file",
+    "min": "",
+    "max": "",
+    "type": "Float64",
+    "uomLabel": "CO2",
+    "defaultValue": "null",
+    "labels": [
+        "environment",
+        "CO2"
+    ]
+}
+
+2. Kreirati Device Profile pozivanjem HTTP POST metode na adresu http://localhost:48081/api/v1/deviceprofile/uploadfile
+i selktovanjem fajla docker-profile.yaml
+
+3. Kreirati device HTTP POST metodom na adresu http://localhost:48081/api/v1/device
+{
+    "name": "SensorValueCluster2",
+    "description": "Raspberry Pi sensor cluster",
+    "adminState": "unlocked",
+    "operatingState": "enabled",
+    "protocols": {
+        "HTTP": {
+            "host": "localhost",
+            "unitID": "1"
+        }
+    },
+    "labels": [
+        "Temperature sensor",
+        "DHT11"
+    ],
+    "location": "Nis",
+    "service": {
+        "name": "edgex-device-rest"
+    },
+    "profile": {
+        "name": "SensorCluster2"
+    }
+}
+
+https://www.youtube.com/watch?v=Jszd7zrl-_U - kako postaviti grafanu
+
+Potrebno je klonirati repozitorijum https://github.com/jonas-werner/colorChanger.git u root folder projekta.
+Nakon toga je potrebno pozicinoirati se u colorChanger folder i izbildovati docker kontejner komandom "docker build -t colorchanger ."
+Zatim je potrebno pokrenuti ga komandom "docker run -d -p 5000:5000 --name colorchanger colorchanger:latest"
+Nakon toga je moguce pozivanje REST Api-ja na portu 5000 pomocu Postman-a. 
+Potrebno je da EdgeX zna za ovu test aplikaciju kako bi mogao da komunicira sa njom.
+Kod pokretanja python skripte, potrebno je staviti za "ip" parametar "localhost", a za devip parametar lokalnu IP adresu masine na kojoj je pokrenut colorChanger.
